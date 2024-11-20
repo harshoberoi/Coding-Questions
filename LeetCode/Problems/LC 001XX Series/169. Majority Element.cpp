@@ -1,35 +1,24 @@
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
-        unordered_map<int,int> mpp;
-        int n = nums.size();
-        int element = 0;
-        for(int i = 0;i<nums.size();i++)
-        {
-            mpp[nums[i]]++;
-        }
+        //Moore's Voting algorithm
 
+        int cnt = 0;
+        int el ;
         
-        // for(const auto &x : mpp)
-        // {
-        // if(x.second >= (n/2))
-        // {
-          
-        //     element = x.first;
-        // }
-        // }
+        for(int i = 0; i < nums.size(); i++)
+        {
+            if(cnt == 0)
+            {
+                cnt = 1;
+                el = nums[i];
+            }
+            else if(nums[i] == el)
+            cnt++;
 
-         int maxKey = -1;
-    int maxFreq = INT_MIN;
-
-   
-    for (auto it = mpp.begin(); it != mpp.end(); it++) {
-        if (it->second > maxFreq) {
-            maxFreq = it->second;
-            maxKey = it->first;
+            else
+            cnt--;
         }
-    }
-        return maxKey;
-
+        return el;
     }
 };
